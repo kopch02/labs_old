@@ -2,6 +2,7 @@
 #include <sstream>
 #include <fstream>
 #include <iomanip>
+#include <ctime>
 
 using namespace std;
 
@@ -56,7 +57,7 @@ void nextdate(datetime* array,int i)
     }
     if(array[i].month==2)
     {
-        if((array[i].year%4==0) &&(array[i].year%4000!=0) && ((array[i].year%100!=0)||(array[i].year%400==0)))
+        if((array[i].year%4==0) ||(array[i].year%4000!=0) || ((array[i].year%100!=0)||(array[i].year%400==0)))
         {
             if(array[i].day==29)
             {
@@ -106,7 +107,7 @@ void prevdate(datetime* arrayPrev,int i)
         arrayPrev[i].month-=1;
         if(arrayPrev[i].month==2)
         {
-            if((arrayPrev[i].year%4==0) &&(arrayPrev[i].year%4000!=0) && ((arrayPrev[i].year%100!=0)||(arrayPrev[i].year%400==0)))
+            if((arrayPrev[i].year%4==0) ||(arrayPrev[i].year%4000!=0) || ((arrayPrev[i].year%100!=0)||(arrayPrev[i].year%400==0)))
             {
                 arrayPrev[i].day=29;
             }
@@ -136,8 +137,60 @@ void prevdate(datetime* arrayPrev,int i)
     }
 }
 
+void sistem()
+{
+    int a,b;
+    int year,month,day,hour,minute,second;
+ time_t rawtime;
+  struct tm * timeinfo;
 
+  time( &rawtime ); 
+  a=time(&rawtime);
+  a+=25200;
+  year=a/31536000;
+  a-=31536000*year;
+  year+=2;
+  b=year/4;
+  year-=2;
+  a-=b*86400;
+  year+=1970;
+  cout<<endl<<"year"<<endl<<year;
+  day=a/86400;
+  a-=86400*day;
+  month=day/31;
+  day-=month*31;
+  month+=1;
+  cout<<endl<<"month"<<endl<<month;
+  if((month==2)||(month==3))
+  {
+      day+=3;
+  }
+  if((month==4)||(month==5))
+  {
+      day+=4;
+  }
+  if((month==6)||(month==7)||(month==8))
+  {
+      day+=5;
+  }
+  if((month==9)||(month==10))
+  {
+      day+=6;
+  }
+  if((month==11)||(month==12))
+  {
+      day+=7;
+  }
+  cout<<endl<<"day"<<endl<<day;
+  hour=a/3600;
+  a-=3600*hour;
+  cout<<endl<<"hour"<<endl<<hour;
+  minute=a/60;
+  a-=60*minute;
+  cout<<endl<<"minute"<<endl<<minute;
+  cout<<endl<<"second"<<endl<<a;
 
+}
 
 main()
 {
@@ -162,11 +215,11 @@ main()
      
     }
     arrayPrev=arrayCurrent;
+    cout<<endl<<endl<<endl<<"dates for variant"<<endl<<endl<<endl;
     for(int i=0;i<n;i++)
     {
         if(arrayCurrent[i].day==1)
         {
-            cout<<endl<<"dates for variant"<<endl;
             cout<<endl<<"current"<<endl;
             out(arrayCurrent,i);
             cout<<endl<<"prev"<<endl;
@@ -174,5 +227,7 @@ main()
             out(arrayPrev,i);
         }
     }
+    cout<<endl<<"date of sistem:"<<endl;
+    sistem();
     return 0;
 }
