@@ -16,6 +16,22 @@ struct datetime
     int year;
 };
 
+void find_n(int& n)
+{
+    ifstream file;
+    datetime a;
+    file.open("file.txt");
+    if(!file)
+    {
+        cout<<"file not found"<<endl;
+        return;
+    }
+    while(file >> a.second>>a.minute>>a.hour>>a.day>>a.month>>a.year)
+    {
+        n++;
+    }
+    file.close();
+}
 void in(datetime* array,int n)
 {
     ifstream file;
@@ -194,8 +210,9 @@ void sistem()
 
 main()
 {
-    int n=8;
+    int n;
     datetime date;
+    find_n(n);
     datetime* array = new datetime[n];
     datetime* arrayPrev = new datetime[n];
     datetime* arrayCurrent = new datetime[n];
