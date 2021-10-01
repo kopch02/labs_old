@@ -6,8 +6,9 @@
 
 using namespace std;
 
-struct datetime
+class datetime
 {
+    public:
     int second;
     int minute;
     int hour;
@@ -15,11 +16,17 @@ struct datetime
     int month;
     int year;
 };
+class app
+{
+    public:
+    void run();
+};
 
 void find_n(int& n)
 {
     ifstream file;
     datetime a;
+    n=0;
     file.open("file.txt");
     if(!file)
     {
@@ -208,11 +215,12 @@ void sistem()
 
 }
 
-main()
+
+void app::run()
 {
     int n;
-    datetime date;
     find_n(n);
+    datetime date;
     datetime* array = new datetime[n];
     datetime* arrayPrev = new datetime[n];
     datetime* arrayCurrent = new datetime[n];
@@ -246,5 +254,11 @@ main()
     }
     cout<<endl<<"date of sistem:"<<endl;
     sistem();
-    return 0;
+}
+
+main()
+{
+   app a;
+   a.run();
+   
 }
