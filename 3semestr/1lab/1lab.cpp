@@ -3,12 +3,9 @@
 #include <fstream>
 #include <iomanip>
 #include <ctime>
-
 using namespace std;
-
-class datetime
+struct datetime
 {
-    public:
     int second;
     int minute;
     int hour;
@@ -16,17 +13,11 @@ class datetime
     int month;
     int year;
 };
-class app
-{
-    public:
-    void run();
-};
 
 void find_n(int& n)
 {
     ifstream file;
     datetime a;
-    n=0;
     file.open("file.txt");
     if(!file)
     {
@@ -124,7 +115,6 @@ void nextdate(datetime* array,int i)
 void prevdate(datetime* arrayPrev,int i)
 {
     arrayPrev[i].day-=1;
-
     if(arrayPrev[i].day==0)
     {
         arrayPrev[i].month-=1;
@@ -156,17 +146,14 @@ void prevdate(datetime* arrayPrev,int i)
             arrayPrev[i].day=30;
             return;
         }
-
     }
 }
-
 void sistem()
 {
     int a,b;
     int year,month,day,hour,minute,second;
  time_t rawtime;
   struct tm * timeinfo;
-
   time( &rawtime ); 
   a=time(&rawtime);
   a+=25200;
@@ -212,15 +199,14 @@ void sistem()
   a-=60*minute;
   cout<<endl<<"minute"<<endl<<minute;
   cout<<endl<<"second"<<endl<<a;
-
 }
 
-
-void app::run()
+main()
 {
+    int n=8;
     int n;
-    find_n(n);
     datetime date;
+    find_n(n);
     datetime* array = new datetime[n];
     datetime* arrayPrev = new datetime[n];
     datetime* arrayCurrent = new datetime[n];
@@ -254,11 +240,5 @@ void app::run()
     }
     cout<<endl<<"date of sistem:"<<endl;
     sistem();
-}
-
-main()
-{
-   app a;
-   a.run();
-   
+    return 0;
 }
