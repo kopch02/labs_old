@@ -321,6 +321,7 @@ void app::runmain()
     delete[] array;
     delete[] arrayCurrent;
     delete[] arrayPrev;
+    
 }
 
 int main()

@@ -5,17 +5,35 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(gdb) Подключить",
+            "type": "cppdbg",
+            "request": "attach",
+            "program": "C:/Users/iskan/Desktop/ycheba/lab/3semestr/lab3/gdi32.lib",
+            "processId": "${command:pickProcess}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/path/to/gdb",
+            "setupCommands": [
+                {
+                    "description": "Включить автоматическое форматирование для gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+
+
+        {
             "name": "g++.exe - Сборка и отладка активного файла",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
+            "cwd": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-win32-seh-rt_v6-rev0\\mingw64\\bin",
             "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\Users\\iskan\\gcc\\bin\\gdb.exe",
+            "miDebuggerPath": "C:\\Program Files\\mingw-w64\\x86_64-8.1.0-win32-seh-rt_v6-rev0\\mingw64\\bin\\gdb.exe",
             "setupCommands": [
                 {
                     "description": "Включить автоматическое форматирование для gdb",
@@ -23,7 +41,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "C/C++: g++.exe сборка активного файла"
+            "preLaunchTask": "C/C++: g++.exe сборка активного файла ver(1) "
         }
     ]
 }
