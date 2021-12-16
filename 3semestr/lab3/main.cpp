@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <cmath>
 #include <iomanip>
@@ -10,15 +11,10 @@
 #include <objidl.h>
 #include <gdiplus.h>
 
-
-//#include <SFML/Graphics.hpp>
-
-
 using namespace std;
 
 const double PI=3.14159265359;
 enum {A,B};
-
 
 //глобальные переменные для рисования окна
 HINSTANCE hInstance; HINSTANCE hPrevInst;
@@ -36,15 +32,28 @@ LRESULT CALLBACK WindowFuncSquaRectangle(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK WindowFuncSquare(HWND, UINT, WPARAM, LPARAM);
 LRESULT CALLBACK WindowFuncTriangle(HWND, UINT, WPARAM, LPARAM);
 
+class Exc {
 
+public:
+    int number;
+	string message;
+	Exc(int a, string b)
+	{
+		number = a;
+		message = b;
+	}
+	void show()
+	{
+		cout << endl;
+		cout << "Error number " << number << ":" << endl;
+		cout << "\t" << message << endl;
 
-  
-   
+	}
+	~Exc()  {};
+};
 
-
- class shape
+class shape
 {   
-    
     public:
     void draw();
     virtual void move()=0;
@@ -55,9 +64,29 @@ LRESULT CALLBACK WindowFuncTriangle(HWND, UINT, WPARAM, LPARAM);
 
     }
 };
+
+class Volume
+{
+    public:
+    double V;
+    double hight;
+    Volume()
+    {
+       
+    }
+
+    double volume(double s)
+    {
+        cout<<"enter the height of the vigura for the volume->";
+        cin>>hight;
+        V=s*hight;
+        cout<<endl<<"figure volume="<<V<<endl;
+        
+    }
+};
+
 class exemple : public shape
 {
-    
     public:
         /*Главная функция приложения WinMain*/
         int  WINAPI WinMainEllipse(  HINSTANCE hInstance, HINSTANCE hPrevInst,LPSTR lpszArgs, int nWinMode) 
@@ -312,14 +341,13 @@ class eleps : public exemple
     public:
     eleps(double ae, double be):exemple()
     {
-        if (ae>0)
+        if ((ae>=0)&&(be>=0))
         {
             A=ae;
-        }
-        if(be>0)
-        {
             B=be;
+            
         }
+       else throw Exc(4,"eleps error");
     }
     double area()
     {
@@ -349,7 +377,7 @@ private:
             A=r;
             B=r;
         }
-       
+       else throw Exc(1,"circle error");
     }
     
     double area()
@@ -378,20 +406,17 @@ class triangle : public exemple
     public:
     triangle(double a, double h):exemple()
     {
-        if (a>0)
+        if ((a>0)&&(h>0))
         {
             A=a;
-        }
-        if (h>0)
-        {
             H=h;
         }
+       else throw Exc(2,"triangle error");
     }
     double area()
     {
         return (0.5*A*H);
     }
-    
         void draw()
     {
         AT=A;
@@ -412,14 +437,12 @@ class rectangle : public exemple
     public:
     rectangle(double a, double b):exemple()
     {
-        if (a>0)
+        if ((a>0)&&(b>0))
         {
             A=a;
-        }
-        if(b>0)
-        {
             B=b;
         }
+       else throw Exc(3,"rectangle error");
     }
     
     double area()
@@ -442,7 +465,6 @@ class rectangle : public exemple
 class square : public rectangle
 {
     private:
-    double A;
     public:
     square(double a):rectangle(A,B)
     {
@@ -450,7 +472,6 @@ class square : public rectangle
         {
             A=a;
             B=a;
-            
         }
     }
     double area()
@@ -476,6 +497,11 @@ class run
     void runmain()
     {
         double a,b,r,h,base, ae, be, S;
+        
+
+
+        try
+        {
         cout<<endl<<"enter radius for circle(r)->";
         cin>>r;
         cout<<endl<<"enter hight for triangle(h)->";
@@ -486,37 +512,58 @@ class run
         cin>>a; cout<<"b->"; cin>>b;
         cout<<endl<<"endter a and b for eleps a->";
         cin>>ae; cout<<"b->"; cin>>be;
+        
+        cout<<endl<<ae<<endl<<be;
+
         eleps x=eleps(ae,be);
         circle c=circle(r);
         triangle v=triangle(base,h);
         rectangle n=rectangle(a,b);
         square z=square(a);
+        Volume VOL=Volume();
 
         S=c.area();
-        cout<<endl<<"circle="<<S<<endl;
+        cout<<endl<<"circle S ="<<S<<endl;
+        VOL.volume(S);
         c.draw();
+        
         S=v.area();
-        cout<<endl<<"triangle="<<S<<endl;
+        cout<<endl<<"triangle S ="<<S<<endl;
+        VOL.volume(S);
         v.draw();
+        
         S=n.area();
-        cout<<endl<<"rectangle="<<S<<endl;
+        cout<<endl<<"rectangle S ="<<S<<endl;
+        VOL.volume(S);
         n.draw();
+
         S=z.area();
-        cout<<endl<<"square="<<S<<endl;
+        cout<<endl<<"square S ="<<S<<endl;
+        VOL.volume(S);
         z.draw();
+        
         S=x.area();
-        cout<<endl<<"eleps="<<S<<endl;
+        cout<<endl<<"eleps S ="<<S<<endl;
+        VOL.volume(S);
         x.draw();
+        }
+
+        catch(Exc exc) 
+        {
+			exc.show();
+		}
+        catch (...) 
+        {
+			cout << "Some unknown error" << endl;
+		}
     }
 };
 
 
 int main()
-{ 
-    double ae,be,S;
+{
     run l;
     l.runmain();
-    //MessageBox(NULL, "hello!!!", "zxc", MB_OK); //создание окна и сообщением и кнопкой ок
     system("pause");
     
     return 0;
