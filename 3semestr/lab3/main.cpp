@@ -35,19 +35,15 @@ LRESULT CALLBACK WindowFuncTriangle(HWND, UINT, WPARAM, LPARAM);
 class Exc {
 
 public:
-    int number;
 	string message;
-	Exc(int a, string b)
+	Exc( string b)
 	{
-		number = a;
 		message = b;
 	}
 	void show()
 	{
 		cout << endl;
-		cout << "Error number " << number << ":" << endl;
 		cout << "\t" << message << endl;
-
 	}
 	~Exc()  {};
 };
@@ -65,30 +61,28 @@ class shape
     }
 };
 
-class Volume
+template<typename T>
+class cylinder
 {
     public:
     double V;
-    double hight;
-    Volume()
+    T* m;
+    double h;
+    cylinder(T* f, double height)
     {
-       
+       h=height;
+       m=f;
     }
-
-    double volume(double s)
+    double volume()
     {
-        cout<<"enter the height of the vigura for the volume->";
-        cin>>hight;
-        V=s*hight;
-        cout<<endl<<"figure volume="<<V<<endl;
-        
+        V=m->area()*h;
+        cout<<endl<<"figure volume="<<V<<endl;   
     }
 };
 
 class exemple : public shape
 {
     public:
-        /*Главная функция приложения WinMain*/
         int  WINAPI WinMainEllipse(  HINSTANCE hInstance, HINSTANCE hPrevInst,LPSTR lpszArgs, int nWinMode) 
         {
         char szWinName[ ]="MyWindow";      //Произвольное имя класса главного окна
@@ -347,7 +341,7 @@ class eleps : public exemple
             B=be;
             
         }
-       else throw Exc(4,"eleps error");
+       else throw Exc("eleps error");
     }
     double area()
     {
@@ -377,7 +371,7 @@ private:
             A=r;
             B=r;
         }
-       else throw Exc(1,"circle error");
+       else throw Exc("circle error");
     }
     
     double area()
@@ -411,7 +405,7 @@ class triangle : public exemple
             A=a;
             H=h;
         }
-       else throw Exc(2,"triangle error");
+       else throw Exc("triangle error");
     }
     double area()
     {
@@ -437,12 +431,12 @@ class rectangle : public exemple
     public:
     rectangle(double a, double b):exemple()
     {
-        if ((a>0)&&(b>0))
+        if ((a>=0)&&(b>=0))
         {
             A=a;
             B=b;
         }
-       else throw Exc(3,"rectangle error");
+       else throw Exc("rectangle error");
     }
     
     double area()
@@ -496,56 +490,70 @@ class run
     public:
     void runmain()
     {
-        double a,b,r,h,base, ae, be, S;
+        double a,b,r,h,base, ae, be, S, heightc,heightt,heightr,heights,heighte;
         
-
-
         try
         {
         cout<<endl<<"enter radius for circle(r)->";
         cin>>r;
-        cout<<endl<<"enter hight for triangle(h)->";
+        cout<<"enter the height of the circle for the volume->";
+        cin>>heightc;
+
+        cout<<endl<<"enter height for triangle(h)->";
         cin>>h;
         cout<<endl<<"endter base of triangle(base)->";
         cin>>base;
+        cout<<"enter the height of the triangle for the volume->";
+        cin>>heightt;
+
         cout<<endl<<"enter a,b sides of the rectangle(side a will be used for the square) a->";
         cin>>a; cout<<"b->"; cin>>b;
+        cout<<"enter the height of the square for the volume->";
+        cin>>heights;
+        cout<<"enter the height of the rectangle for the volume->";
+        cin>>heightr;
+
         cout<<endl<<"endter a and b for eleps a->";
         cin>>ae; cout<<"b->"; cin>>be;
-        
-        cout<<endl<<ae<<endl<<be;
+        cout<<"enter the height of the eleps for the volume->";
+        cin>>heighte;
 
-        eleps x=eleps(ae,be);
-        circle c=circle(r);
-        triangle v=triangle(base,h);
-        rectangle n=rectangle(a,b);
-        square z=square(a);
-        Volume VOL=Volume();
+        eleps* x=new eleps(ae,be);
+        circle* c=new circle(r);
+        triangle* v=new triangle(base,h);
+        rectangle* n=new rectangle(a,b);
+        square* z=new square(a);
 
-        S=c.area();
+        cylinder<eleps> EL=cylinder(x,heighte);
+        cylinder<circle> CI=cylinder(c,heightr);
+        cylinder<triangle> TR=cylinder(v,heightt);
+        cylinder<rectangle> RE=cylinder(n,heightr);
+        cylinder<square> SQ=cylinder(z,heightr);
+
+        S=c->area();
         cout<<endl<<"circle S ="<<S<<endl;
-        VOL.volume(S);
-        c.draw();
+        CI.volume();
+        c->draw();
         
-        S=v.area();
+        S=v->area();
         cout<<endl<<"triangle S ="<<S<<endl;
-        VOL.volume(S);
-        v.draw();
+        TR.volume();
+        v->draw();
         
-        S=n.area();
+        S=n->area();
         cout<<endl<<"rectangle S ="<<S<<endl;
-        VOL.volume(S);
-        n.draw();
+        RE.volume();
+        n->draw();
 
-        S=z.area();
+        S=z->area();
         cout<<endl<<"square S ="<<S<<endl;
-        VOL.volume(S);
-        z.draw();
+        SQ.volume();
+        z->draw();
         
-        S=x.area();
+        S=x->area();
         cout<<endl<<"eleps S ="<<S<<endl;
-        VOL.volume(S);
-        x.draw();
+        EL.volume();
+        x->draw();
         }
 
         catch(Exc exc) 
@@ -565,16 +573,13 @@ int main()
     run l;
     l.runmain();
     system("pause");
-    
+
     return 0;
 }  
 
-
 LRESULT CALLBACK WindowFuncEllipse(HWND hwnd, UINT message,WPARAM wParam, LPARAM lParam)  
 {
-        
                                  // выбор по значению сообщения (message)
-    
     switch(message) 
     {            
         case WM_DESTROY:                           //При завершении приложения пользователем
@@ -591,13 +596,10 @@ LRESULT CALLBACK WindowFuncEllipse(HWND hwnd, UINT message,WPARAM wParam, LPARAM
                                                     // направляются на обработку по умолчанию
         return DefWindowProc (hwnd,message,wParam,lParam);
     }                                                           //Конец оператора switch
-    //return 0;
 }
 LRESULT CALLBACK WindowFuncSquaCircle(HWND hwnd, UINT message,WPARAM wParam, LPARAM lParam)  
-{
-        
+{  
                                  // выбор по значению сообщения (message)
-    
     switch(message) 
     {            
         case WM_DESTROY:                           //При завершении приложения пользователем
@@ -614,13 +616,10 @@ LRESULT CALLBACK WindowFuncSquaCircle(HWND hwnd, UINT message,WPARAM wParam, LPA
                                                     // направляются на обработку по умолчанию
         return DefWindowProc (hwnd,message,wParam,lParam);
     }                                                           //Конец оператора switch
-    //return 0;
 }
 LRESULT CALLBACK WindowFuncSquaRectangle(HWND hwnd, UINT message,WPARAM wParam, LPARAM lParam)  
-{
-        
+{  
                                  // выбор по значению сообщения (message)
-    
     switch(message) 
     {            
         case WM_DESTROY:                           //При завершении приложения пользователем
@@ -637,13 +636,10 @@ LRESULT CALLBACK WindowFuncSquaRectangle(HWND hwnd, UINT message,WPARAM wParam, 
                                                     // направляются на обработку по умолчанию
         return DefWindowProc (hwnd,message,wParam,lParam);
     }                                                           //Конец оператора switch
-    //return 0;
 }
 LRESULT CALLBACK WindowFuncSquare(HWND hwnd, UINT message,WPARAM wParam, LPARAM lParam)  
 {
-        
                                  // выбор по значению сообщения (message)
-    
     switch(message) 
     {            
         case WM_DESTROY:                           //При завершении приложения пользователем
@@ -660,22 +656,17 @@ LRESULT CALLBACK WindowFuncSquare(HWND hwnd, UINT message,WPARAM wParam, LPARAM 
                                                     // направляются на обработку по умолчанию
         return DefWindowProc (hwnd,message,wParam,lParam);
     }                                                           //Конец оператора switch
-    //return 0;
 }
 LRESULT CALLBACK WindowFuncTriangle(HWND hwnd, UINT message,WPARAM wParam, LPARAM lParam)  
 {
-        
                                  // выбор по значению сообщения (message)
-    
     switch(message) 
     {            
-        PAINTSTRUCT ps; 
+    PAINTSTRUCT ps; 
     LOGBRUSH lb; 
     RECT rc; 
     HDC hdc; 
-     
     HPEN hPen;
-     
     HGDIOBJ  hPenOld; 
 
         case WM_DESTROY:                           //При завершении приложения пользователем
@@ -683,13 +674,10 @@ LRESULT CALLBACK WindowFuncTriangle(HWND hwnd, UINT message,WPARAM wParam, LPARA
         break;
         case WM_PAINT:
         {
-        
-      
         GetClientRect(hwnd, &rc);
-        
         lb.lbStyle = BS_SOLID; 
-            lb.lbColor = RGB(255,0,0); 
-            lb.lbHatch = 0;
+        lb.lbColor = RGB(255,0,0); 
+        lb.lbHatch = 0;
         hdc = BeginPaint(hwnd, &ps);
         hPen = ExtCreatePen(PS_COSMETIC | PS_SOLID, 1, &lb, 0, NULL);
         hPenOld = SelectObject(hdc, hPen);
@@ -698,7 +686,6 @@ LRESULT CALLBACK WindowFuncTriangle(HWND hwnd, UINT message,WPARAM wParam, LPARA
         LineTo(hdc,AT*0.5,HT);
         LineTo(hdc,1,1);
         DeleteObject(hPen); 
-        
         ReleaseDC(hwnd, hdc);
         EndPaint(hwnd, &ps);
         }
@@ -707,5 +694,4 @@ LRESULT CALLBACK WindowFuncTriangle(HWND hwnd, UINT message,WPARAM wParam, LPARA
                                                     // направляются на обработку по умолчанию
         return DefWindowProc (hwnd,message,wParam,lParam);
     }                                                           //Конец оператора switch
-    //return 0;
 }
