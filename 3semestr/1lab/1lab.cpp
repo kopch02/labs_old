@@ -204,7 +204,6 @@ void sistem()
 main()
 {
     int n=8;
-    int n;
     datetime date;
     find_n(n);
     datetime* array = new datetime[n];

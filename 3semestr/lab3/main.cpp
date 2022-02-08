@@ -639,7 +639,7 @@ LRESULT CALLBACK WindowFuncSquaRectangle(HWND hwnd, UINT message,WPARAM wParam, 
 }
 LRESULT CALLBACK WindowFuncSquare(HWND hwnd, UINT message,WPARAM wParam, LPARAM lParam)  
 {
-                                 // выбор по значению сообщения (message)
+    // выбор по значению сообщения (message)
     switch(message) 
     {            
         case WM_DESTROY:                           //При завершении приложения пользователем

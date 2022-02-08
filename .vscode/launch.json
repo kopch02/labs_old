@@ -5,6 +5,34 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch One",
+            "request": "launch",
+            "mainClass": "One",
+            "projectName": "lab_f62c5a37"
+        },
+        {
+            "type": "java",
+            "name": "Launch HelloWorld",
+            "request": "launch",
+            "mainClass": "lab1.HelloWorld",
+            "projectName": "lab_f62c5a37"
+        },
+        {
+            "type": "java",
+            "name": "Launch test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "lab_f62c5a37"
+        },
+        {
+            "type": "java",
+            "name": "Launch HelloWorld",
+            "request": "launch",
+            "mainClass": "HelloWorld",
+            "projectName": "lab_f62c5a37"
+        },
+        {
             "name": "(gdb) Подключить",
             "type": "cppdbg",
             "request": "attach",
@@ -20,8 +48,6 @@
                 }
             ]
         },
-
-
         {
             "name": "g++.exe - Сборка и отладка активного файла",
             "type": "cppdbg",
