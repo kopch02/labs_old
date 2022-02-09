@@ -1,3 +1,6 @@
+from logging import handlers
+
+
 def n1():
     a=input("какой кинотеатр?\n-")
     b=input("какой фильм?\n-")
@@ -151,13 +154,20 @@ def n10():
             print(a)
             break
 def n11():
-    n = int(input())
-    for i in range(1,n+1):
-       if i <= n//2+1:
-          for j in range(i):
-             print('*',end='')
-       elif i >n//2+1:
-          for j in range(0,n-i+1):
-             print('*',end='')
-       print()
-n11()
+    h = int(input("введите высоту:"))
+    n=h
+    g=1
+    for i in range(h):
+        n-=1
+        print(" "*n,"*"*g," "*n)
+        g+=2
+def n12():
+    n=int(input("введите число:"))
+    if n<=0:
+        print("число должно быть положительным!!!")
+        quit
+    a=1
+    for x in range(1,n+1):
+        print(x)
+        a+=1
+n12()
