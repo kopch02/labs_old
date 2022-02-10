@@ -10,7 +10,7 @@ x2=[0,1,0,1]
 
 c=[0,0,0,1]
 
-for epoh in range(1):
+for epoh in range(100000):
     se=0
     for sample in range(4):
         y=float(w[0])*float(x0[sample])+float(w[1])*float(x1[sample])+float(w[2])*float(x2[sample])
@@ -22,18 +22,11 @@ for epoh in range(1):
         y=float(w[0])*float(x0[i])+float(w[1])*float(x1[i])+float(w[2])*float(x2[i])
         e=0.5*pow(c[i]-y,2)
         se+=e
-    #print(se/4)
+
+    print(se/4)
+
 for sample in range(4):
     y=float(w[0])*float(x0[sample])+float(w[1])*float(x1[sample])+float(w[2])*float(x2[sample])
     print(c[sample],"   ",y)
+
 yy=-(w[1]/w[2])*x1[0]+(0.5-w[2]*x0[0])/w[2]
-
-plt.grid()
-plt.xlabel("x")
-plt.ylabel("y")
-x = np.linspace(0, -2, 1)
-y=-x
-plt.plot(x,y)
-
-plt.show()
-    

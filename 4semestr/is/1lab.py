@@ -167,7 +167,21 @@ def n12():
         print("число должно быть положительным!!!")
         quit
     a=1
-    for x in range(1,n+1):
-        print(x)
+    b=1
+    t=0
+    while (b+t)<n+1:
+        for x in range(1,a+1):
+            print(str(b+t)*b," ",end="")
+            if (b+t)==n:
+                quit()
+            t+=1
+        print("\n")
         a+=1
-n12()
+def n13():
+    a=int(input("Длинна:"))
+    b=int(input("Ширина:"))
+    c=input("из чего:")
+    print(str(c)*b,sep=" ")
+    for x in range(a-2):
+        print(c," "*(b-2),c,sep='')
+    print(str(c)*b,sep=" ")
