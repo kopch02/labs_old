@@ -39,11 +39,11 @@ class Create{
         Triangle t= new Triangle();
 
 
-        e.eleps(ae, be);
-        c.circle(r);
-        rec.rectangle(a, b);
-        s.square(as);
-        t.triangle(at, h);
+        e.create_eleps(ae, be);
+        c.create_circle(r);
+        rec.create_rectangle(a, b);
+        s.create_square(as);
+        t.create_triangle(at, h);
 
         S=e.area();
         System.out.printf("площадь эллипса= %s\n",S);
@@ -69,7 +69,7 @@ class Shape{
 class Eleps extends Shape{
     double A;
     double B;
-    public void eleps(double ae, double be){
+    public void create_eleps(double ae, double be){
         A=ae;
         B=be;
     }
@@ -79,7 +79,7 @@ class Eleps extends Shape{
 }
 class Circle extends Eleps{
     double R;
-    public void circle(double r){
+    public void create_circle(double r){
         R=r;
     }
     public double area(){
@@ -89,7 +89,7 @@ class Circle extends Eleps{
 class Triangle extends Shape{
     double A;
     double H;
-    public void triangle(double a, double h){
+    public void create_triangle(double a, double h){
         A=a;
         H=h;
     }
@@ -100,7 +100,7 @@ class Triangle extends Shape{
 class Rectangle extends Shape{
     double A;
     double B;
-    public void rectangle(double a, double b){
+    public void create_rectangle(double a, double b){
         A=a;
         B=b;
     }
@@ -110,7 +110,7 @@ class Rectangle extends Shape{
 }
 class Square extends Rectangle{
     double A;
-    public void square(double a){
+    public void create_square(double a){
         A=a;
     }
     public double area(){
