@@ -11,8 +11,7 @@ def n1():
 def n2():
     a = input("первое слово:")
     b = input("второе слово:")
-    if (a == "да" and b == "нет") or (a == "да" and b == "да") or (
-            a == "нет" and b == "нет") or (a == "нет" and b == "да"):
+    if (a == "да" and b == "нет") or (a == "да" and b == "да") or (a == "нет" and b == "нет") or (a == "нет" and b == "да"):
         print("верно")
     else:
         print("не верно")
@@ -51,7 +50,7 @@ def n6():
         print("число не красиове((((")
 
 
-def n7():  #Доделать
+def n7():
     a = int(input("введите число:"))
     b1 = a // 1000
     b2 = (a // 100) % 10
@@ -210,3 +209,4 @@ def n13():
     for x in range(a - 2):
         print(c, " " * (b - 2), c, sep='')
     print(str(c) * b, sep=" ")
+n7()

@@ -43,6 +43,7 @@ def graf():
     print(yy)
     plt.plot(xx, yy)
 
+    plt.show()
     plt.savefig("and_graph.png")
 
 
