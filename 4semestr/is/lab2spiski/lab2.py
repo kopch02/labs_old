@@ -83,16 +83,8 @@ def n6():
             print(a[x-1],a[x],sep=" ")
             quit()
 
-def n7():
-    a=[-1,2,-2,-3,3,-3,5,-77,-6,3,5]
-    n=len(a)
-    if n%2!=0:
-        n-=1
-    for x in range(1,n,2):
-        a[x-1],a[x]=a[x],a[x-1]
-    print(a)
 
-def n8():
+def n7():
     a=[-1,2,-2,-3,3,-3,5,-77,-6,3,5]
     n = []
     for number in a:
@@ -102,15 +94,19 @@ def n8():
             n.append(number)
     print(n)
 
+def n8():
+    f1=[int(input("ферзь 1 \n1:")),int(input("2:"))]
+    f2=[int(input("ферзь 2 \n1:")),int(input("2:"))]
+    f3=[int(input("ферзь 3 \n1:")),int(input("2:"))]
+    f4=[int(input("ферзь 4 \n1:")),int(input("2:"))]
+    f5=[int(input("ферзь 5 \n1:")),int(input("2:"))]
+    f6=[int(input("ферзь 6 \n1:")),int(input("2:"))]
+    f7=[int(input("ферзь 7 \n1:")),int(input("2:"))]
+    f8=[int(input("ферзь 8 \n1:")),int(input("2:"))]
+    f=[f1,f2,f3,f4,f5,f6,f7,f8]
+    for x in range(8):
+        print(f[x])
 
-f1=[int(input("ферзь 1 \n1:")),int(input("2:"))]
-f2=[int(input("ферзь 2 \n1:")),int(input("2:"))]
-f3=[int(input("ферзь 3 \n1:")),int(input("2:"))]
-f4=[int(input("ферзь 4 \n1:")),int(input("2:"))]
-f5=[int(input("ферзь 5 \n1:")),int(input("2:"))]
-f6=[int(input("ферзь 6 \n1:")),int(input("2:"))]
-f7=[int(input("ферзь 7 \n1:")),int(input("2:"))]
-f8=[int(input("ферзь 8 \n1:")),int(input("2:"))]
-f=[f1,f2,f3,f4,f5,f6,f7,f8]
-for x in range(8):
-    print(f[x])
+
+
+
