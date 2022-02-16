@@ -28,6 +28,7 @@ for epoh in range(1000):
 for sample in range(4):
     y=float(w[0])*float(x0[sample])+float(w[1])*float(x1[sample])+float(w[2])*float(x2[sample])
     print(c[sample],"   ",y)
+    
 def graf():
     plt. scatter([x1[i] for i in range(4)],[x2[i] for i in range(4)])
     plt.xlabel("x1")
