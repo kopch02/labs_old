@@ -46,10 +46,24 @@ def n3():
 def n4():
     stroka=input()
     n=len(stroka)
-    if "f" not in stroka:
-        quit()
+    l=list(stroka)
+    if "f" in l:
+        s=(l.count("f"))
+        if s==1:
+            a=l.index("f")
+            print(a+1)
+            quit()
+        else:
+            a=l.index("f")
+            print(a+1)
+            revers=stroka[::-1]
+            r=list(revers)
+            b=r.index("f")
+            b-=n
+            b*=-1
+            print(b)
     else:
-        print("qwe")
+        quit()
 
 def n5():
     a=[1,2,2,3,3,3,5,77,6,3,5]
@@ -89,18 +103,14 @@ def n8():
     print(n)
 
 
-def n9():
-    f1=[int(input("ферзь 1 \n1:")),int(input("2:"))]
-    f2=[int(input("ферзь 2 \n1:")),int(input("2:"))]
-    f3=[int(input("ферзь 3 \n1:")),int(input("2:"))]
-    f4=[int(input("ферзь 4 \n1:")),int(input("2:"))]
-    f5=[int(input("ферзь 5 \n1:")),int(input("2:"))]
-    f6=[int(input("ферзь 6 \n1:")),int(input("2:"))]
-    f7=[int(input("ферзь 7 \n1:")),int(input("2:"))]
-    f8=[int(input("ферзь 8 \n1:")),int(input("2:"))]
-    f=[f1,f2,f3,f4,f5,f6,f7,f8]
-    for x in range(8):
-        print(f[x])
-
-
-n9()
+f1=[int(input("ферзь 1 \n1:")),int(input("2:"))]
+f2=[int(input("ферзь 2 \n1:")),int(input("2:"))]
+f3=[int(input("ферзь 3 \n1:")),int(input("2:"))]
+f4=[int(input("ферзь 4 \n1:")),int(input("2:"))]
+f5=[int(input("ферзь 5 \n1:")),int(input("2:"))]
+f6=[int(input("ферзь 6 \n1:")),int(input("2:"))]
+f7=[int(input("ферзь 7 \n1:")),int(input("2:"))]
+f8=[int(input("ферзь 8 \n1:")),int(input("2:"))]
+f=[f1,f2,f3,f4,f5,f6,f7,f8]
+for x in range(8):
+    print(f[x])
