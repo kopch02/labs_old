@@ -101,14 +101,79 @@ def n7():
 
 
 def n8():
-    f1 = [int(input("ферзь 1 \n1:")), int(input("2:"))]
-    f2 = [int(input("ферзь 2 \n1:")), int(input("2:"))]
-    f3 = [int(input("ферзь 3 \n1:")), int(input("2:"))]
-    f4 = [int(input("ферзь 4 \n1:")), int(input("2:"))]
-    f5 = [int(input("ферзь 5 \n1:")), int(input("2:"))]
-    f6 = [int(input("ферзь 6 \n1:")), int(input("2:"))]
-    f7 = [int(input("ферзь 7 \n1:")), int(input("2:"))]
-    f8 = [int(input("ферзь 8 \n1:")), int(input("2:"))]
-    f = [f1, f2, f3, f4, f5, f6, f7, f8]
-    for x in range(8):
-        print(f[x])
+    def inp(a):
+        for x in range(8):
+            a.append("^")
+    f0=[]
+    f1=[]
+    f2=[]
+    f3=[]
+    f4=[]
+    f5=[]
+    f6=[]
+    f7=[]
+    f8=[]
+    f=[f0,f1,f2,f3,f4,f5,f6,f7]
+    fc=[]
+    
+    for i in f:
+        inp(i)
+    
+    for i in range(8):
+        a=int(input("1я координата ферзя №%s:"%(i+1)))
+        b=int(input("2я координата ферзя №%s:"%(i+1)))
+        print("\n")
+        if a>8 or b>8 or a<=0 or b<=0:
+            print("координаты должны быть в пределах от 1 до 8 (включительно)")
+            quit()
+        else:
+            c=str(a)+str(b)
+            if c in fc:
+                print("такие координаты уже есть!!")
+                quit()
+            fc.append(c)
+            f[a-1][b-1]="f"
+    #вывод доски
+    for i in range(9):
+        print(i,end="   ")
+    print()
+    for i in range(9):
+        print("____",end="")
+    print()
+    for i in range(8):
+        print(i+1,"| ",end="")
+        for x in range(8):
+            print(f[i][x],end="   ",)
+        print()
+    #проверка
+    p=8
+    for i in range(8):  
+        for x in range(8): #проверка по горизонтали
+            rev=f[i][::-1]
+            q=f[i].index("f")
+            w=rev.index("f")
+            w-=7
+            w*=-1
+            if q!=w:   
+                print("YES,1")
+                quit()
+        p-=1
+        temp=0
+        for x in range(8):
+            if f[x][i]=="f":
+                temp+=1
+                if temp==2:
+                    print("YES,2")
+                    quit()
+    f8=[0,0,0,0,0,0,0,0]
+    f.append(f8)
+    f[0].append(0)
+    for i in range(8):
+        f[i+1].append(0)
+        for x in range(8):
+            if f[i][x]=="f":
+                if f[i][x]==f[i+1][x+1]:
+                    print("YES,3")
+                    quit()
+    print("NO")
+n8()

@@ -26,9 +26,7 @@ class player(character):
 class enemy(character):
     def __init__(self,name,hp,damage):
         super().__init__(name,hp,damage)
-        self.name=name
-        self.hp=hp
-        self.damage=damage
+        
     def attack(self,victim):
         victim.hp-=self.damage
         if victim.hp<=0:

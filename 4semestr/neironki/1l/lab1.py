@@ -1,6 +1,6 @@
 from cmath import*
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 ly=0.01
 w=[0.1,-0.05,0.05]
